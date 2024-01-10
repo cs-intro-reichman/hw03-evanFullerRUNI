@@ -38,9 +38,14 @@ public class LoanCalc {
 	* the number of periods (n), and epsilon, a tolerance level.
 	*/
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+    public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
+		iterationCounter = 0;
+    	double payment = 0;
+		while (Math.abs(endBalance(loan, rate, n, payment)) >= epsilon) {
+			payment += epsilon;
+			iterationCounter++;
+		}
+    	return payment;
     }
     
     /**
@@ -50,9 +55,23 @@ public class LoanCalc {
 	* the number of periods (n), and epsilon, a tolerance level.
 	*/
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {
+		iterationCounter = 0;
+		// initialize low and high bounds of the search
+    	double L = 0, H = loan, payment = (L + H) / 2.0;
+		double endBalance = endBalance(loan, rate, n, payment);
+		// loops and sets bounds based on endBalance
+		while (Math.abs(endBalance) >= epsilon) {
+			if (endBalance > 0) {
+				L = payment;
+			} else if (endBalance < 0) {
+				H = payment;
+			}
+			payment = (L + H) / 2;
+			iterationCounter++;
+			endBalance = endBalance(loan, rate, n, payment);
+		}
+    	return payment;
     }
 	
 	/**
@@ -60,7 +79,11 @@ public class LoanCalc {
 	* interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
-		// Replace the following statement with your code
-    	return 0;
+		// loop function iterating with n where payment is subtracted from loan and rate is added to new loan
+		for (int i = 0; i < n; i++) {
+			loan -= payment;
+			loan *= (1 + (rate / 100));
+		}
+    	return loan;
 	}
 }
