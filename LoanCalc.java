@@ -80,7 +80,7 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// loop function iterating with n where payment is subtracted from loan and rate is added to new loan
 		for (int i = 0; i < n; i++) {
-			loan -= payment * (1 + rate / 100);
+			loan = (loan - payment) * (1 + rate / 100);
 		}
     	return loan;
 	}
