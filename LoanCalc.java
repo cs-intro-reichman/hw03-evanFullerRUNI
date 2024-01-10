@@ -60,8 +60,8 @@ public class LoanCalc {
     	double L = 0, H = loan, payment = (L + H) / 2.0;
 		double endBalance = endBalance(loan, rate, n, payment);
 		// loops and sets bounds based on endBalance
-		while (Math.abs(endBalance) > epsilon) {
-			if (endBalance > 0) {
+		while (H - L > epsilon) {
+			if (endBalance * endBalance(loan, rate, n, L) > 0) {
 				L = payment;
 			} else {
 				H = payment;
