@@ -21,7 +21,6 @@ public class Calendar {
 	 		advance();
         }
 	 }
-	
 	 // Advances the date (day, month, year) and the day-of-the-week.
 	 // If the month changes, sets the number of days in this month.
 	 // Side effects: changes the static variables dayOfMonth, month, year, dayOfWeek, nDaysInMonth.
