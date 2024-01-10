@@ -40,11 +40,8 @@ public class LoanCalc {
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		iterationCounter = 0;
     	double payment = 0;
-		double endBalance = endBalance(loan, rate, n, payment);
-		while (endBalance >= epsilon) {
-			System.out.println(payment);
+		while (endBalance(loan, rate, n, payment) >= 0) {
 			payment += epsilon;
-			endBalance = endBalance(loan, rate, n, payment);
 			iterationCounter++;
 		}
     	return payment;
@@ -83,8 +80,7 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// loop function iterating with n where payment is subtracted from loan and rate is added to new loan
 		for (int i = 0; i < n; i++) {
-			loan -= payment;
-			loan *= (1 + (rate / 100));
+			loan -= payment * (1 + rate / 100);
 		}
     	return loan;
 	}
